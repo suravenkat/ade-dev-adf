@@ -1,0 +1,105 @@
+{
+	"name": "pl_Fail_switch",
+	"properties": {
+		"activities": [
+			{
+				"name": "Switch1",
+				"type": "Switch",
+				"dependsOn": [],
+				"userProperties": [],
+				"typeProperties": {
+					"on": {
+						"value": "@pipeline().parameters.inputValue",
+						"type": "Expression"
+					},
+					"cases": [
+						{
+							"value": "finance",
+							"activities": [
+								{
+									"name": "finance",
+									"type": "ExecutePipeline",
+									"dependsOn": [],
+									"policy": {
+										"secureInput": false
+									},
+									"userProperties": [],
+									"typeProperties": {
+										"pipeline": {
+											"referenceName": "pl_copy_file",
+											"type": "PipelineReference"
+										},
+										"waitOnCompletion": true
+									}
+								}
+							]
+						},
+						{
+							"value": "sales",
+							"activities": [
+								{
+									"name": "sales",
+									"type": "ExecutePipeline",
+									"dependsOn": [],
+									"policy": {
+										"secureInput": false
+									},
+									"userProperties": [],
+									"typeProperties": {
+										"pipeline": {
+											"referenceName": "pl_copy_multiple_files",
+											"type": "PipelineReference"
+										},
+										"waitOnCompletion": true
+									}
+								}
+							]
+						},
+						{
+							"value": "orders",
+							"activities": [
+								{
+									"name": "orders",
+									"type": "ExecutePipeline",
+									"dependsOn": [],
+									"policy": {
+										"secureInput": false
+									},
+									"userProperties": [],
+									"typeProperties": {
+										"pipeline": {
+											"referenceName": "pl_lookup",
+											"type": "PipelineReference"
+										},
+										"waitOnCompletion": true
+									}
+								}
+							]
+						}
+					],
+					"defaultActivities": [
+						{
+							"name": "Default",
+							"type": "Fail",
+							"dependsOn": [],
+							"userProperties": [],
+							"typeProperties": {
+								"message": "Invalid Input.Pls provide valid input",
+								"errorCode": "420"
+							}
+						}
+					]
+				}
+			}
+		],
+		"parameters": {
+			"inputValue": {
+				"type": "string",
+				"defaultValue": "sales"
+			}
+		},
+		"annotations": [],
+		"lastPublishTime": "2025-03-26T02:05:12Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

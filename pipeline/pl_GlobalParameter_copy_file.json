@@ -1,0 +1,84 @@
+{
+	"name": "pl_GlobalParameter_copy_file",
+	"properties": {
+		"activities": [
+			{
+				"name": "Copy data1",
+				"type": "Copy",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "DelimitedTextSource",
+						"storeSettings": {
+							"type": "AzureBlobFSReadSettings",
+							"recursive": true,
+							"enablePartitionDiscovery": false
+						},
+						"formatSettings": {
+							"type": "DelimitedTextReadSettings"
+						}
+					},
+					"sink": {
+						"type": "DelimitedTextSink",
+						"storeSettings": {
+							"type": "AzureBlobFSWriteSettings"
+						},
+						"formatSettings": {
+							"type": "DelimitedTextWriteSettings",
+							"quoteAllText": true,
+							"fileExtension": ".txt"
+						}
+					},
+					"enableStaging": false,
+					"translator": {
+						"type": "TabularTranslator",
+						"typeConversion": true,
+						"typeConversionSettings": {
+							"allowDataTruncation": true,
+							"treatBooleanAsNumber": false
+						}
+					}
+				},
+				"inputs": [
+					{
+						"referenceName": "ds_source_Globalparameter_copyFile",
+						"type": "DatasetReference",
+						"parameters": {
+							"SourceContainer": {
+								"value": "@pipeline().globalParameters.container",
+								"type": "Expression"
+							}
+						}
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "ds_Target_GlobalaParameter_copyFile",
+						"type": "DatasetReference",
+						"parameters": {
+							"TargetContainer": {
+								"value": "@pipeline().globalParameters.container",
+								"type": "Expression"
+							},
+							"TargetFilePath": {
+								"value": "@pipeline().globalParameters.TargetFilePath",
+								"type": "Expression"
+							}
+						}
+					}
+				]
+			}
+		],
+		"annotations": [],
+		"lastPublishTime": "2025-03-20T14:54:16Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

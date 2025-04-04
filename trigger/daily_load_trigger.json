@@ -1,0 +1,51 @@
+{
+	"name": "daily_load_trigger",
+	"properties": {
+		"description": "daily_load_trigger--copy sales table ",
+		"annotations": [],
+		"runtimeState": "Stopped",
+		"pipelines": [
+			{
+				"pipelineReference": {
+					"referenceName": "pl_Custom_Full_Load",
+					"type": "PipelineReference"
+				},
+				"parameters": {
+					"TableList": [
+						{
+							"tableName": "iplteams",
+							"tableSchemaName": "dbo",
+							"WaterMark_Column": "last_updated"
+						},
+						{
+							"tableName": "employees",
+							"tableSchemaName": "dbo",
+							"WaterMark_Column": "last_updated"
+						},
+						{
+							"tableName": "salesitems",
+							"tableSchemaName": "dbo",
+							"WaterMark_Column": "last_updated"
+						}
+					]
+				}
+			},
+			{
+				"pipelineReference": {
+					"referenceName": "pl_copy_file",
+					"type": "PipelineReference"
+				}
+			}
+		],
+		"type": "ScheduleTrigger",
+		"typeProperties": {
+			"recurrence": {
+				"frequency": "Day",
+				"interval": 1,
+				"startTime": "2025-03-31T22:15:13",
+				"endTime": "2025-04-02T22:32:00",
+				"timeZone": "India Standard Time"
+			}
+		}
+	}
+}

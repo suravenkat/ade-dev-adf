@@ -1,0 +1,24 @@
+{
+	"name": "ds_target_copy_sql_tables_forEach",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "ls_source_adls",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"folderPath": "target/copymultiparameter",
+				"fileSystem": "adegen2container"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": []
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

@@ -1,0 +1,21 @@
+{
+	"name": "ade-supply-adf-dev",
+	"properties": {
+		"globalParameters": {
+			"container": {
+				"type": "string",
+				"value": "adegen2container"
+			},
+			"TargetFilePath": {
+				"type": "string",
+				"value": "target"
+			}
+		}
+	},
+	"location": "eastus",
+	"identity": {
+		"type": "SystemAssigned",
+		"principalId": "0d726e3f-cba2-46e0-95ee-d9eb7a486500",
+		"tenantId": "ec4df35f-b9aa-4a61-97cb-a07536ff0876"
+	}
+}

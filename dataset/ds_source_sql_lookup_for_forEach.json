@@ -1,0 +1,13 @@
+{
+	"name": "ds_source_sql_lookup_for_forEach",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "ls_azuresql_server",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": []
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}
